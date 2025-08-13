@@ -1,0 +1,50 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Laptop",
+      "description": "High-performance laptop for work and gaming",
+      "price": 999.99,
+      "count": 15,
+      "image": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": "3",
+      "name": "Headphones",
+      "description": "Wireless noise-canceling headphones",
+      "price": 199.99,
+      "count": 30,
+      "image": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": "eb1e",
+      "name": "sdfg",
+      "description": "sdfg",
+      "price": 200,
+      "count": 2300
+    },
+    {
+      "id": "35a5",
+      "name": "sfsf",
+      "description": "sfsf",
+      "price": 1200,
+      "count": 13
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "productId": "1",
+      "text": "Great laptop, very fast!",
+      "author": "John Doe",
+      "date": "2024-01-15T10:30:00.000Z"
+    },
+    {
+      "id": "2",
+      "productId": "1",
+      "text": "Excellent performance for gaming",
+      "author": "Jane Smith",
+      "date": "2024-01-16T14:20:00.000Z"
+    }
+  ]
+}
