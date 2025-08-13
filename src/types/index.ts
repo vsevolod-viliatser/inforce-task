@@ -1,21 +1,24 @@
 export interface Product {
-  id: string;
+  id: number;
   name: string;
-  description: string;
-  price: number;
+  imageUrl: string;
   count: number;
-  image?: string;
+  size: {
+    width: number;
+    height: number;
+  };
+  weight: string;
+  comments: Comment[];
 }
 
 export interface Comment {
-  id: string;
-  productId: string;
-  text: string;
-  author: string;
+  id: number;
+  productId: number;
+  description: string;
   date: string;
 }
 
-export type SortOption = "name" | "count" | "price";
+export type SortOption = "name" | "count" | "weight";
 
 // Store types
 export type ProductState = {

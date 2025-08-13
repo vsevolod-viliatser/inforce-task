@@ -6,6 +6,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onDelete }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="p-6">
+        {/* Product Image */}
+        <div className="mb-4">
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="w-full h-48 object-cover rounded-lg"
+          />
+        </div>
+
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-xl font-semibold text-gray-800">
             {product.name}
@@ -15,12 +24,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onDelete }) => {
           </span>
         </div>
 
-        <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-2xl font-bold text-blue-600">
-            ${product.price}
-          </span>
+        {/* Product Details */}
+        <div className="space-y-2 mb-4">
+          <div className="flex justify-between text-sm text-gray-600">
+            <span>Size:</span>
+            <span>
+              {product.size.width} × {product.size.height}
+            </span>
+          </div>
+          <div className="flex justify-between text-sm text-gray-600">
+            <span>Weight:</span>
+            <span className="font-medium">{product.weight}</span>
+          </div>
+          <div className="flex justify-between text-sm text-gray-600">
+            <span>Comments:</span>
+            <span className="font-medium">{product.comments.length}</span>
+          </div>
         </div>
 
         <div className="flex gap-2">

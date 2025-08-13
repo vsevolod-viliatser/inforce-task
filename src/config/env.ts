@@ -1,9 +1,9 @@
 // Environment configuration
 export const config = {
   api: {
-    baseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:3001",
-    dbUrl: import.meta.env.VITE_DB_URL || "http://localhost:3001",
-    dbPort: import.meta.env.VITE_DB_PORT || "3001",
+    baseUrl: "http://localhost:3002", // Force correct backend port
+    dbUrl: "http://localhost:3002", // Force correct backend port
+    dbPort: "3002", // Force correct backend port
   },
   app: {
     name: import.meta.env.VITE_APP_NAME || "Product List App",

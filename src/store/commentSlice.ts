@@ -9,9 +9,9 @@ const initialState: CommentState = {
 
 export const fetchComments = createAsyncThunk(
   "comments/fetchComments",
-  async (productId: string) => {
+  async (productId: number) => {
     const response = await fetch(
-      `${config.api.baseUrl}/comments?productId=${productId}`
+      `${config.api.baseUrl}/api/comments?productId=${productId}`
     );
     return response.json();
   }
@@ -24,7 +24,7 @@ export const addComment = createAsyncThunk(
       ...comment,
       date: new Date().toISOString(),
     };
-    const response = await fetch(`${config.api.baseUrl}/comments`, {
+    const response = await fetch(`${config.api.baseUrl}/api/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newComment),
@@ -35,8 +35,8 @@ export const addComment = createAsyncThunk(
 
 export const deleteComment = createAsyncThunk(
   "comments/deleteComment",
-  async (id: string) => {
-    await fetch(`${config.api.baseUrl}/comments/${id}`, {
+  async (id: number) => {
+    await fetch(`${config.api.baseUrl}/api/comments/${id}`, {
       method: "DELETE",
     });
     return id;

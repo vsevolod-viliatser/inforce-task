@@ -19,14 +19,14 @@ const ProductDetail: React.FC = () => {
 
   const [showEditModal, setShowEditModal] = useState(false);
 
-  const product = products.find((p) => p.id === id);
+  const product = products.find((p) => p.id === parseInt(id!));
 
   useEffect(() => {
     if (!product) {
       dispatch(fetchProducts());
     }
     if (id) {
-      dispatch(fetchComments(id));
+      dispatch(fetchComments(parseInt(id)));
     }
   }, [dispatch, id, product]);
 
@@ -54,7 +54,12 @@ const ProductDetail: React.FC = () => {
               <h1 className="text-4xl font-bold text-gray-800 mb-2">
                 {product.name}
               </h1>
-              <p className="text-gray-600 text-lg">{product.description}</p>
+              <div className="text-gray-600 text-lg">
+                <p>
+                  Size: {product.size.width} × {product.size.height}
+                </p>
+                <p>Weight: {product.weight}</p>
+              </div>
             </div>
             <button
               onClick={() => setShowEditModal(true)}
@@ -66,22 +71,20 @@ const ProductDetail: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
-              {product.image && (
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-64 object-cover rounded-lg"
-                />
-              )}
+              <img
+                src={product.imageUrl}
+                alt={product.name}
+                className="w-full h-64 object-cover rounded-lg"
+              />
             </div>
 
             <div className="space-y-4">
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  Price
+                  Weight
                 </h3>
                 <p className="text-3xl font-bold text-blue-600">
-                  ${product.price}
+                  {product.weight}
                 </p>
               </div>
 

@@ -10,30 +10,28 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [newComment, setNewComment] = useState({
-    text: "",
-    author: "",
+    description: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!newComment.text.trim() || !newComment.author.trim()) {
-      alert("Please fill in both name and comment");
+    if (!newComment.description.trim()) {
+      alert("Please fill in your comment");
       return;
     }
 
     dispatch(
       addComment({
-        productId,
-        text: newComment.text.trim(),
-        author: newComment.author.trim(),
+        productId: parseInt(productId),
+        description: newComment.description.trim(),
       })
     );
 
-    setNewComment({ text: "", author: "" });
+    setNewComment({ description: "" });
   };
 
-  const handleDeleteComment = (commentId: string) => {
+  const handleDeleteComment = (commentId: number) => {
     if (window.confirm("Are you sure you want to delete this comment?")) {
       dispatch(deleteComment(commentId));
     }
@@ -50,31 +48,14 @@ const CommentSection: React.FC<CommentSectionProps> = ({
         </h3>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Name *
-              </label>
-              <input
-                type="text"
-                value={newComment.author}
-                onChange={(e) =>
-                  setNewComment({ ...newComment, author: e.target.value })
-                }
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                required
-              />
-            </div>
-          </div>
-
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Comment *
             </label>
             <textarea
-              value={newComment.text}
+              value={newComment.description}
               onChange={(e) =>
-                setNewComment({ ...newComment, text: e.target.value })
+                setNewComment({ ...newComment, description: e.target.value })
               }
               rows={3}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
@@ -102,9 +83,6 @@ const CommentSection: React.FC<CommentSectionProps> = ({
             <div key={comment.id} className="bg-white rounded-lg shadow p-4">
               <div className="flex justify-between items-start mb-2">
                 <div>
-                  <h4 className="font-semibold text-gray-800">
-                    {comment.author}
-                  </h4>
                   <p className="text-sm text-gray-500">
                     {new Date(comment.date).toLocaleDateString()}
                   </p>
@@ -116,7 +94,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
                   Delete
                 </button>
               </div>
-              <p className="text-gray-700">{comment.text}</p>
+              <p className="text-gray-700">{comment.description}</p>
             </div>
           ))
         )}

@@ -11,7 +11,7 @@ const initialState: ProductState = {
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const response = await fetch(`${config.api.baseUrl}/products`);
+    const response = await fetch(`${config.api.baseUrl}/api/products`);
     return response.json();
   }
 );
@@ -19,7 +19,7 @@ export const fetchProducts = createAsyncThunk(
 export const addProduct = createAsyncThunk(
   "products/addProduct",
   async (product: Omit<Product, "id">) => {
-    const response = await fetch(`${config.api.baseUrl}/products`, {
+    const response = await fetch(`${config.api.baseUrl}/api/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
@@ -32,7 +32,7 @@ export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async (product: Product) => {
     const response = await fetch(
-      `${config.api.baseUrl}/products/${product.id}`,
+      `${config.api.baseUrl}/api/products/${product.id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -45,8 +45,8 @@ export const updateProduct = createAsyncThunk(
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async (id: string) => {
-    await fetch(`${config.api.baseUrl}/products/${id}`, {
+  async (id: number) => {
+    await fetch(`${config.api.baseUrl}/api/products/${id}`, {
       method: "DELETE",
     });
     return id;
