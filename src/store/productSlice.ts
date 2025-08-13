@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { config } from "../config/env.ts";
-import { Product, ProductState, SortOption } from "../types";
+import { Product, ProductCreate, ProductState, SortOption } from "../types";
 
 const initialState: ProductState = {
   products: [],
@@ -18,7 +18,7 @@ export const fetchProducts = createAsyncThunk(
 
 export const addProduct = createAsyncThunk(
   "products/addProduct",
-  async (product: Omit<Product, "id">) => {
+  async (product: ProductCreate) => {
     const response = await fetch(`${config.api.baseUrl}/api/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

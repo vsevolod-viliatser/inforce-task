@@ -23,7 +23,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
     dispatch(
       addComment({
-        productId: parseInt(productId),
+        productId: productId,
         description: newComment.description.trim(),
       })
     );

@@ -101,7 +101,7 @@ const ProductDetail: React.FC = () => {
         </div>
       </div>
 
-      <CommentSection productId={id!} comments={comments} />
+      <CommentSection productId={parseInt(id!)} comments={comments} />
 
       {showEditModal && (
         <EditProductModal

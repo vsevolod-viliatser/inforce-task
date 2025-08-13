@@ -11,6 +11,17 @@ export interface Product {
   comments: Comment[];
 }
 
+export interface ProductCreate {
+  name: string;
+  imageUrl: string;
+  count: number;
+  size: {
+    width: number;
+    height: number;
+  };
+  weight: string;
+}
+
 export interface Comment {
   id: number;
   productId: number;
@@ -43,7 +54,7 @@ export type ProductCardProps = {
 };
 
 export type CommentSectionProps = {
-  productId: string;
+  productId: number;
   comments: Comment[];
 };
 

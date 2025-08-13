@@ -8,10 +8,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ onClose }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [formData, setFormData] = useState({
     name: "",
-    description: "",
-    price: "",
+    imageUrl: "",
     count: "",
-    image: "",
+    width: "",
+    height: "",
+    weight: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -19,9 +20,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ onClose }) => {
 
     if (
       !formData.name ||
-      !formData.description ||
-      !formData.price ||
-      !formData.count
+      !formData.imageUrl ||
+      !formData.count ||
+      !formData.width ||
+      !formData.height ||
+      !formData.weight
     ) {
       alert("Please fill in all required fields");
       return;
@@ -29,10 +32,13 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ onClose }) => {
 
     const newProduct = {
       name: formData.name,
-      description: formData.description,
-      price: parseFloat(formData.price),
+      imageUrl: formData.imageUrl,
       count: parseInt(formData.count),
-      image: formData.image || undefined,
+      size: {
+        width: parseInt(formData.width),
+        height: parseInt(formData.height),
+      },
+      weight: formData.weight,
     };
 
     dispatch(addProduct(newProduct));
@@ -70,35 +76,19 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ onClose }) => {
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Description *
+              Image URL *
             </label>
-            <textarea
-              name="description"
-              value={formData.description}
+            <input
+              type="url"
+              name="imageUrl"
+              value={formData.imageUrl}
               onChange={handleChange}
-              rows={3}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
               required
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Price *
-              </label>
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                step="0.01"
-                min="0"
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                required
-              />
-            </div>
-
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Count *
@@ -113,19 +103,53 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ onClose }) => {
                 required
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Weight *
+              </label>
+              <input
+                type="text"
+                name="weight"
+                value={formData.weight}
+                onChange={handleChange}
+                placeholder="e.g., 200g, 1kg"
+                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                required
+              />
+            </div>
           </div>
 
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Image URL (optional)
-            </label>
-            <input
-              type="url"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-3 py-2"
-            />
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Width (px) *
+              </label>
+              <input
+                type="number"
+                name="width"
+                value={formData.width}
+                onChange={handleChange}
+                min="1"
+                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Height (px) *
+              </label>
+              <input
+                type="number"
+                name="height"
+                value={formData.height}
+                onChange={handleChange}
+                min="1"
+                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                required
+              />
+            </div>
           </div>
 
           <div className="flex gap-3">
