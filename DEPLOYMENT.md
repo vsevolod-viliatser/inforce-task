@@ -61,3 +61,4 @@ After deployment, update the environment variables in your frontend service with
 - Ensure your `db.json` file is committed to the repository
 - Check Render logs for any build or runtime errors
 - The `start:server` script now uses `${PORT:-3001}` which provides a default port if $PORT is not set
+- **IMPORTANT**: `json-server` is now in `dependencies` (not `devDependencies`) so it's available in production
