@@ -1,9 +1,13 @@
 // Environment configuration
 export const config = {
   api: {
-    baseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:3002",
-    dbUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:3002",
-    dbPort: import.meta.env.VITE_API_PORT || "3002",
+    baseUrl:
+      import.meta.env.VITE_API_BASE_URL ||
+      "https://inforce-backend-pfhf.onrender.com",
+    dbUrl:
+      import.meta.env.VITE_API_BASE_URL ||
+      "https://inforce-backend-pfhf.onrender.com",
+    dbPort: import.meta.env.VITE_API_PORT || "443",
   },
   app: {
     name: import.meta.env.VITE_APP_NAME || "Product List App",
