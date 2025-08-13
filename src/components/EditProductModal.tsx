@@ -13,8 +13,8 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
     name: product.name,
     imageUrl: product.imageUrl,
     count: product.count.toString(),
-    width: product.size.width.toString(),
-    height: product.size.height.toString(),
+    width: product.width.toString(),
+    height: product.height.toString(),
     weight: product.weight,
   });
 
@@ -23,8 +23,8 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
       name: product.name,
       imageUrl: product.imageUrl,
       count: product.count.toString(),
-      width: product.size.width.toString(),
-      height: product.size.height.toString(),
+      width: product.width.toString(),
+      height: product.height.toString(),
       weight: product.weight,
     });
   }, [product]);
@@ -49,10 +49,8 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
       name: formData.name,
       imageUrl: formData.imageUrl,
       count: parseInt(formData.count),
-      size: {
-        width: parseInt(formData.width),
-        height: parseInt(formData.height),
-      },
+      width: parseInt(formData.width),
+      height: parseInt(formData.height),
       weight: formData.weight,
     };
 

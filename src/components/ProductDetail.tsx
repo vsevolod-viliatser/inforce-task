@@ -56,7 +56,7 @@ const ProductDetail: React.FC = () => {
               </h1>
               <div className="text-gray-600 text-lg">
                 <p>
-                  Size: {product.size.width} × {product.size.height}
+                  Size: {product.width} × {product.height}
                 </p>
                 <p>Weight: {product.weight}</p>
               </div>

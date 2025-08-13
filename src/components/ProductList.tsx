@@ -14,6 +14,35 @@ const ProductList: React.FC = () => {
     (state: RootState) => state.products
   );
 
+  // Ensure products is always an array
+  const safeProducts = Array.isArray(products) ? products : [];
+
+  // Safe sorting with null checks
+  const sortedProducts =
+    safeProducts.length > 0
+      ? [...safeProducts].sort((a, b) => {
+          try {
+            if (sortBy === "name") {
+              const nameA = a?.name || "";
+              const nameB = b?.name || "";
+              return nameA.localeCompare(nameB);
+            } else if (sortBy === "count") {
+              const countA = a?.count || 0;
+              const countB = b?.count || 0;
+              return countB - countA;
+            } else {
+              // Sort by weight (extract numeric value)
+              const weightA = parseInt((a?.weight || "0").replace(/\D/g, ""));
+              const weightB = parseInt((b?.weight || "0").replace(/\D/g, ""));
+              return weightA - weightB;
+            }
+          } catch (error) {
+            console.error("Error sorting products:", error);
+            return 0; // Return 0 to maintain original order
+          }
+        })
+      : [];
+
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
@@ -38,19 +67,6 @@ const ProductList: React.FC = () => {
       setProductToDelete(null);
     }
   };
-
-  const sortedProducts = [...products].sort((a, b) => {
-    if (sortBy === "name") {
-      return a.name.localeCompare(b.name);
-    } else if (sortBy === "count") {
-      return b.count - a.count;
-    } else {
-      // Sort by weight (extract numeric value)
-      const weightA = parseInt(a.weight.replace(/\D/g, ""));
-      const weightB = parseInt(b.weight.replace(/\D/g, ""));
-      return weightA - weightB;
-    }
-  });
 
   if (loading) {
     return (
@@ -101,7 +117,8 @@ const ProductList: React.FC = () => {
           </select>
         </div>
         <div className="text-sm text-gray-600">
-          {products.length} product{products.length !== 1 ? "s" : ""} found
+          {safeProducts.length} product{safeProducts.length !== 1 ? "s" : ""}{" "}
+          found
         </div>
       </div>
 

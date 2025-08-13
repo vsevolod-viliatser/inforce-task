@@ -34,10 +34,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ onClose }) => {
       name: formData.name,
       imageUrl: formData.imageUrl,
       count: parseInt(formData.count),
-      size: {
-        width: parseInt(formData.width),
-        height: parseInt(formData.height),
-      },
+      width: parseInt(formData.width),
+      height: parseInt(formData.height),
       weight: formData.weight,
     };
 

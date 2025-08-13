@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onDelete }) => {
           <div className="flex justify-between text-sm text-gray-600">
             <span>Size:</span>
             <span>
-              {product.size.width} × {product.size.height}
+              {product.width} × {product.height}
             </span>
           </div>
           <div className="flex justify-between text-sm text-gray-600">

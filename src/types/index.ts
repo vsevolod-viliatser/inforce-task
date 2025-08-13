@@ -3,10 +3,8 @@ export interface Product {
   name: string;
   imageUrl: string;
   count: number;
-  size: {
-    width: number;
-    height: number;
-  };
+  width: number;
+  height: number;
   weight: string;
   comments: Comment[];
 }
@@ -15,10 +13,8 @@ export interface ProductCreate {
   name: string;
   imageUrl: string;
   count: number;
-  size: {
-    width: number;
-    height: number;
-  };
+  width: number;
+  height: number;
   weight: string;
 }
 
