@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { config } from "../config/env.ts";
 import { Product, ProductState, SortOption } from "../types";
 
 const initialState: ProductState = {
@@ -10,7 +11,7 @@ const initialState: ProductState = {
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const response = await fetch("http://localhost:3001/products");
+    const response = await fetch(`${config.api.baseUrl}/products`);
     return response.json();
   }
 );
@@ -18,7 +19,7 @@ export const fetchProducts = createAsyncThunk(
 export const addProduct = createAsyncThunk(
   "products/addProduct",
   async (product: Omit<Product, "id">) => {
-    const response = await fetch("http://localhost:3001/products", {
+    const response = await fetch(`${config.api.baseUrl}/products`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
@@ -31,7 +32,7 @@ export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async (product: Product) => {
     const response = await fetch(
-      `http://localhost:3001/products/${product.id}`,
+      `${config.api.baseUrl}/products/${product.id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -45,7 +46,7 @@ export const updateProduct = createAsyncThunk(
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id: string) => {
-    await fetch(`http://localhost:3001/products/${id}`, {
+    await fetch(`${config.api.baseUrl}/products/${id}`, {
       method: "DELETE",
     });
     return id;

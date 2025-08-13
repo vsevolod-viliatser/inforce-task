@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { config } from "../config/env.ts";
 import { deleteProduct, fetchProducts, setSortBy } from "../store/productSlice";
 import { AppDispatch, RootState } from "../store/store";
 import { Product, SortOption } from "../types";
@@ -59,7 +60,7 @@ const ProductList: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Product List</h1>
+        <h1 className="text-3xl font-bold text-gray-800">{config.app.name}</h1>
         <button
           onClick={() => setShowAddModal(true)}
           className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"

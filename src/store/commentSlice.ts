@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { config } from "../config/env.ts";
 import { Comment, CommentState } from "../types";
 
 const initialState: CommentState = {
@@ -10,7 +11,7 @@ export const fetchComments = createAsyncThunk(
   "comments/fetchComments",
   async (productId: string) => {
     const response = await fetch(
-      `http://localhost:3001/comments?productId=${productId}`
+      `${config.api.baseUrl}/comments?productId=${productId}`
     );
     return response.json();
   }
@@ -23,7 +24,7 @@ export const addComment = createAsyncThunk(
       ...comment,
       date: new Date().toISOString(),
     };
-    const response = await fetch("http://localhost:3001/comments", {
+    const response = await fetch(`${config.api.baseUrl}/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newComment),
@@ -35,7 +36,7 @@ export const addComment = createAsyncThunk(
 export const deleteComment = createAsyncThunk(
   "comments/deleteComment",
   async (id: string) => {
-    await fetch(`http://localhost:3001/comments/${id}`, {
+    await fetch(`${config.api.baseUrl}/comments/${id}`, {
       method: "DELETE",
     });
     return id;
